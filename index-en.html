@@ -1,0 +1,209 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Laptop Fix Guide</title><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#050c16"><style>
+:root{
+  --bg:#f4f7fb;
+  --card:#ffffff;
+  --text:#0e1a2b;
+  --muted:#5a6e86;
+  --line:#d0dbe8;
+  --accent:#0a7abf;
+  --accent-soft:#e6f4fc;
+  --header:#061018;
+  --header-text:#e8f6ff;
+  --header-muted:#7eb6d4;
+  --shadow:0 4px 16px #0a234012;
+  --glow:transparent;
+}
+body.dark{
+  --bg:#050c16;
+  --card:#0a1626;
+  --text:#d6f0ff;
+  --muted:#7eb6d4;
+  --line:#1a3a5c;
+  --accent:#00d4ff;
+  --accent-soft:#0d2a40;
+  --header:#03080f;
+  --header-text:#e8f6ff;
+  --header-muted:#5aa8c8;
+  --shadow:0 0 20px #00d4ff22;
+  --glow:0 0 12px #00d4ff44;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,sans-serif}
+body.dark{background:radial-gradient(ellipse at top,#0a1a2e 0%,#050c16 60%)}
+header{background:var(--header);color:var(--header-text);padding:14px 16px;border-bottom:1px solid var(--line)}
+body.dark header{border-bottom:1px solid #00d4ff33;box-shadow:0 1px 0 #00d4ff22}
+header small{color:var(--accent);letter-spacing:2px;font-size:11px;font-weight:700}
+h1{font-size:26px;line-height:1.2;margin:12px 0 10px;letter-spacing:0.5px}
+header p{color:var(--header-muted);font-size:13.5px;max-width:450px;margin:0}
+button,input{font:inherit}
+button{cursor:pointer;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);padding:10px 14px}
+button:focus-visible,input:focus{outline:2px solid var(--accent);outline-offset:1px}
+header button{background:#0d1c2e;color:var(--header-text);border:1px solid #1e3a55;padding:7px 12px}
+body.dark header button{border-color:#00d4ff44}
+main{max-width:850px;margin:auto;padding:18px 16px 110px}
+input{width:100%;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:8px;padding:13px 16px}
+body.dark input{box-shadow:inset 0 0 0 1px #00d4ff22}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.active,.primary{background:var(--accent);color:#001018;border-color:var(--accent);font-weight:600}
+body:not(.dark) .active,body:not(.dark) .primary{color:#fff}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin:12px 0;position:relative}
+body.dark .card{box-shadow:var(--glow);border-color:#00d4ff33}
+.card h2{font-size:16.5px;line-height:1.35;margin:0 0 6px}
+.card p{color:var(--muted);font-size:13.5px;margin:0}
+.meta{font-size:10.5px;color:var(--accent);font-weight:700;letter-spacing:1.2px;margin-bottom:6px;text-transform:uppercase}
+.open{display:block;text-align:left;width:100%;padding:0;background:none;border:0}
+.badge{font-size:12px;color:var(--muted)}
+.notice{border-left:3px solid var(--accent);font-size:13px;background:var(--accent-soft);padding:12px 14px;border-radius:6px;margin:16px 0}
+.article{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px;overflow-wrap:anywhere}
+body.dark .article{border-color:#00d4ff33}
+.article h2{font-size:18px;line-height:1.35;margin:26px 0 10px;color:var(--accent)}
+.article p{margin:8px 0;white-space:pre-wrap}
+.article h3{font-size:15.5px;margin:16px 0 6px}
+.toc{color:var(--muted);font-size:13px}
+.pageimg{display:block;width:100%;height:auto;background:#fff;border-radius:8px}
+footer{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:space-evenly;gap:4px;padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+body.dark footer{background:#071018;border-top:1px solid #00d4ff33;box-shadow:0 -1px 0 #00d4ff22}
+footer button{font-size:10px;line-height:13px;padding:5px 4px;flex:1 1 auto;min-width:0;border-radius:6px;white-space:nowrap;border:0;background:transparent}
+footer button.active{background:var(--accent);color:#fff;font-weight:700}
+body.dark footer button.active{background:#00d4ff;color:#001018;font-weight:700;box-shadow:none}
+progress{width:100%;height:6px;accent-color:var(--accent);border-radius:3px}
+.empty{padding:35px;text-align:center;color:var(--muted)}
+.readerbar{position:sticky;top:0;background:var(--bg);padding:10px 0;z-index:2}
+.readerbar button{font-size:13px}
+#toast{position:fixed;bottom:90px;left:20px;right:20px;background:var(--accent);color:#001018;border-radius:8px;padding:12px;text-align:center;display:none;z-index:20;font-weight:600}
+a{color:var(--accent)}
+.header-actions{display:flex;gap:6px;position:relative;z-index:5;flex-shrink:0}
+header .header-actions button{float:none}
+.language-panel{position:absolute;right:0;top:48px;width:235px;padding:15px;background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 35px #0008}
+.language-panel[hidden]{display:none}
+.language-panel strong{display:block;margin-bottom:10px}
+.language-panel button{display:block;width:100%;margin:6px 0;text-align:left}
+.language-panel button:disabled{background:var(--bg);color:var(--muted);cursor:default}
+.language-panel small{display:block;font-size:11px;letter-spacing:0;color:inherit}
+.guide-figure{margin:24px 0;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+.guide-figure .figure-scroll{overflow:auto;background:#fff;border-radius:6px}
+.guide-figure img{display:block;width:100%;height:auto;max-height:360px;object-fit:contain}
+.guide-figure.zoomed img{width:1100px;max-width:none;max-height:none;object-fit:initial}
+.guide-figure figcaption{font-size:13px;color:var(--muted);margin:10px 0}
+.guide-figure button{font-size:13px;padding:6px 12px}
+.quiz-options{border:0;margin:20px 0;padding:0}
+.quiz-options label{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:13px;margin:10px 0;cursor:pointer}
+.quiz-options input{width:20px;min-width:20px;margin:5px 0;box-shadow:none}
+.quiz-options label:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+body.dark .quiz-options label:has(input:checked){box-shadow:0 0 8px #00d4ff33}
+button:disabled{opacity:.5;cursor:default}
+.reward-link{display:block;text-align:left;width:100%;margin:10px 0;border:1px solid var(--line)}
+.reward-reader{margin-top:20px}
+.reward-reader p{white-space:normal}
+.home-heading{white-space:nowrap;font-size:clamp(20px,6vw,26px)}
+#game-home-entry{display:block;margin:0 0 16px}
+#game-continue{display:block;width:100%;font-weight:700;margin-bottom:8px}
+mark.search-hit{color:#d32f2f;font-weight:700;background:transparent;padding:0}
+body.dark mark.search-hit{color:#ff6b6b}
+mark.search-hit.current{background:#ffe082;color:#b71c1c;border-radius:2px;padding:0 2px}
+body.dark mark.search-hit.current{background:#5d4037;color:#ffecb3}
+.findbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin:0 0 12px}
+.findbar .find-count{font-size:13px;color:var(--muted);min-width:4.5em}
+.findbar button{padding:6px 12px;font-size:13px}
+
+.header-row{display:flex;align-items:center;gap:12px;padding:0}
+.header-logo{width:62px;height:62px;border-radius:10px;object-fit:contain;background:#fff;flex-shrink:0}
+.header-text{flex:1;min-width:0}
+.header-text h1{font-size:18px;margin:0 0 2px;line-height:1.2}
+.header-text p{font-size:12.5px;margin:0;color:var(--header-muted);max-width:none}
+.header-actions{display:flex;gap:6px;flex-shrink:0;position:relative}
+header .header-actions button{padding:6px 10px;font-size:13px;border-radius:8px}
+
+.header-logo{border:2px solid var(--accent);border-radius:10px;padding:3px;background:#fff;box-shadow:0 0 0 1px #00d4ff33}
+body.dark .header-logo{box-shadow:0 0 12px #00d4ff66}
+
+.header-row{display:flex;align-items:center;gap:10px}
+.header-title{flex:1;min-width:0;text-align:center}
+.header-title h1{font-size:17px;margin:0;line-height:1.2;white-space:nowrap;text-align:center}
+.header-sub{font-size:12.5px;margin:12px 0 0;color:var(--header-muted);line-height:1.4}
+.header-logo{width:56px;height:56px;border-radius:10px;object-fit:contain;background:#fff;flex-shrink:0}
+
+header .header-actions button{border:2px solid var(--accent);border-radius:10px;background:transparent;color:var(--header-text);padding:7px 12px}
+body.dark header .header-actions button{box-shadow:0 0 12px #00d4ff66}
+
+.card .row{margin:8px 0 0;gap:6px;align-items:center}
+.card .row button{padding:6px 10px;font-size:13px}
+.card .badge{margin:0;line-height:1}
+
+footer{padding:10px 8px calc(10px + env(safe-area-inset-bottom))}
+footer button{font-size:13px;line-height:16px;padding:10px 6px;border-radius:10px}
+
+.language-panel button{color:var(--text);background:var(--card);border:1px solid var(--line)}
+.language-panel button:disabled{color:var(--muted);background:var(--bg)}
+
+header .header-actions .language-panel button{color:var(--text)!important;background:var(--card)!important;border:1px solid var(--line)!important;box-shadow:none!important}
+header .header-actions .language-panel button:disabled{color:var(--muted)!important;background:var(--bg)!important}
+
+.game-entry-row button{height:48px;display:flex;align-items:center;justify-content:center}
+</style><header>
+<div class="header-row">
+  <img src="logo.png" alt="Laptop Fix" class="header-logo">
+  <div class="header-title">
+    <h1 id="heading" class="home-heading">On the workbench.</h1>
+  </div>
+  <div class="header-actions">
+    <button id="language" aria-label="Change language" aria-expanded="false" aria-controls="language-panel">EN ▾</button>
+    <button id="theme" aria-label="Change theme">◐</button>
+    <div id="language-panel" class="language-panel" role="region" aria-label="App language" hidden>
+      <strong>App language</strong>
+      <button id="language-ro" lang="ro">Română</button>
+      <button id="language-en" lang="en">✓ English <small>Active language</small></button>
+      <button disabled lang="fr">Français <small>Coming soon</small></button>
+      <button id="language-close">Close</button>
+    </div>
+  </div>
+</div>
+<p id="subtitle" class="header-sub">Laptop diagnostics, measurements and repairs.<br>Based on Laptop Fix methodology.</p>
+</header><main id="main"></main><footer><button id="nav-all">▤ Guide</button><button id="nav-fav">☆ Favorites</button><button id="nav-pdf">▧ Document</button><button id="nav-game">◇ Quiz</button><button id="nav-channels">♡ Channels</button></footer><div id="toast" role="status"></div><script src="data-en.js"></script><script src="figures-en.js"></script><script>
+
+if(localStorage.getItem('language')==='"ro"')window.location.replace('index.html');
+const $=s=>document.querySelector(s);let state={view:'home',filter:'all',q:'',id:0,page:1};
+function load(k,f){try{return JSON.parse(localStorage.getItem(k))??f}catch(e){return f}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+let fav=load('fav',[]),done=load('done',[]),size=load('size',16);document.body.classList.toggle('dark',load('dark',false));
+function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function norm(s){return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()}
+function toast(s){$('#toast').textContent=s;$('#toast').style.display='block';setTimeout(()=>$('#toast').style.display='none',2200)}
+function home(filter='all'){state.view='home';state.filter=filter;$('#heading').innerHTML='On the workbench.';$('#subtitle').innerHTML='Laptop diagnostics, measurements and repairs.<br>Based on Laptop Fix methodology.';$('#main').innerHTML=`<label for="search" class="toc">SEARCH THE GUIDE</label><input id="search" type="search" placeholder="E.g.: BIOS, 19V, display, DDR4…" value="${esc(state.q)}"><div class="notice"><b>Before starting work</b><br>Disconnect the adapter and battery before disassembly. Guide values are references: check the schematic, platform and datasheet. A single measurement alone does not confirm component failure.</div><div class="row"><button id="all" class="${filter==='all'?'active':''}">All</button><button id="favorites" class="${filter==='fav'?'active':''}">Favorites · ${fav.length}</button></div><div class="toc">${done.length} / ${CHAPTERS.length} sections completed</div><progress value="${done.length}" max="${CHAPTERS.length}"></progress><div id="results"></div><p class="toc" style="text-align:center;margin:30px 0 0">Developer: <a id="developer-link" href="https://www.youtube.com/watch?v=_CNj6W9gFYI&amp;list=PL1j__jJzaeklQhS2r2Cadn_ut1OJtoN2O" aria-label="Laptop Fix on YouTube"><b>Laptop Fix</b></a><br><a id="discord-link" href="https://discord.gg/sbPEbCmBN" aria-label="Discord Laptop Fix" style="display:inline-flex;align-items:center;gap:7px;margin:12px 0"><img src="discord.svg" alt="Discord" width="28" height="28">Discord</a><br>Version 2.0</p>`;$('#search').oninput=e=>{state.q=e.target.value;results()};$('#all').onclick=()=>home();$('#favorites').onclick=()=>home('fav');results();nav()}
+function results(){const q=norm(state.q.trim());const items=CHAPTERS.filter(c=>(state.filter!=='fav'||fav.includes(c.id))&&norm(c.title+' '+c.text).includes(q));$('#results').innerHTML=items.map(c=>{let txt=c.text.replace(/\n/g,' ');let ix=q?norm(txt).indexOf(q):-1;let excerpt=ix>=0?txt.slice(Math.max(0,ix-45),ix+120):txt.slice(0,120);return `<div class="card"><div class="meta">${c.id===0?'INTRODUCTION':c.id===9?'REFERENCE':'CHAPTER '+c.id} ${done.includes(c.id)?' · ✓ COMPLETED':''}</div><button class="open" data-open="${c.id}"><h2>${esc(c.title.replace(/^Chapter \d+: /,''))}</h2><p>${esc(excerpt)}…</p></button><div class="row"><button data-star="${c.id}" aria-label="${fav.includes(c.id)?'Remove from':'Add to'} favorites">${fav.includes(c.id)?'★ Saved':'☆ Save'}</button><span class="badge">PDF · p. ${c.page}</span></div></div>`}).join('')||'<p class="empty">No sections found. Try another search or add favorites.</p>';document.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>read(+b.dataset.open));document.querySelectorAll('[data-star]').forEach(b=>b.onclick=()=>{toggle(+b.dataset.star);results()})}
+function toggle(id){fav=fav.includes(id)?fav.filter(x=>x!==id):[...fav,id];save('fav',fav);toast(fav.includes(id)?'Added to favorites':'Removed from favorites')}
+function sectionFigures(key){return (FIGURES[key]||[]).map(f=>'<figure class="guide-figure"><div class="figure-scroll"><img src="'+esc(f.src)+'" alt="'+esc(f.caption)+'"></div><figcaption>'+esc(f.caption)+'</figcaption><button type="button" class="figure-zoom" aria-expanded="false">Enlarge image</button></figure>').join('')}
+function bodyHTML(text){const lines=text.split('\n');let out='',rows=null;for(const line of lines){if(line==='@table'){rows=[];continue;}if(line==='@endtable'){out+='<div style="overflow:auto"><table class="content-table">'+rows.map((r,i)=>'<tr>'+r.split('|').map(x=>'<'+(i?'td':'th')+'>'+esc(x.trim())+'</'+(i?'td':'th')+'>').join('')+'</tr>').join('')+'</table></div>';rows=null;continue;}if(rows){rows.push(line);continue;}out+='<p>'+esc(line)+'</p>';}return out;}
+function read(id){state.view='reader';state.id=id;save('last',id);const c=CHAPTERS[id];$('#heading').textContent=id===9?'Technical glossary':id===0?'Introduction':'Chapter '+id;$('#subtitle').textContent=c.title.replace(/^Chapter \d+: /,'');const blocks=c.text.split(/\n(?=\d+\.\d+ )/);let html=blocks.map((b,i)=>{let ls=b.split('\n');if(/^\d+\.\d+ /.test(ls[0])){const title=ls.shift();const key=title.match(/^\d+\.\d+/)[0];return '<h2>'+esc(title)+'</h2>'+bodyHTML(ls.join('\n'))+sectionFigures(key);}return '<p>'+esc(b)+'</p>'}).join('');$('#main').innerHTML=`<div class="readerbar row"><button id="back">← Back</button><button id="star">${fav.includes(id)?'★':'☆'} Favorite</button><button id="smaller" aria-label="Decrease text size">A−</button><button id="larger" aria-label="Increase text size">A+</button></div><article class="article" style="font-size:${size}px">${html}</article><div class="notice">Translated text and original illustrations. Diagnostic values and conclusions depend on the platform. The English PDF is available in the Document tab.</div><div class="row"><button id="source">▧ Document page ${c.page}</button><button id="complete" class="primary">${done.includes(id)?'✓ Completed — undo':'Mark as completed'}</button></div><div class="row">${id>0?'<button id="prev">← Previous section</button>':''}${id<9?'<button id="next">Next section →</button>':''}</div>`;document.querySelectorAll('.figure-zoom').forEach(b=>b.onclick=()=>{const expanded=b.closest('figure').classList.toggle('zoomed');b.setAttribute('aria-expanded',String(expanded));b.textContent=expanded?'Reduce image':'Enlarge image'});$('#back').onclick=()=>home(state.filter);$('#star').onclick=()=>{toggle(id);$('#star').textContent=(fav.includes(id)?'★':'☆')+' Favorite'};$('#smaller').onclick=()=>font(-1);$('#larger').onclick=()=>font(1);$('#source').onclick=()=>original(c.page);$('#complete').onclick=()=>{done=done.includes(id)?done.filter(x=>x!==id):[...done,id];save('done',done);$('#complete').textContent=done.includes(id)?'✓ Completed — undo':'Mark as completed'};if($('#prev'))$('#prev').onclick=()=>read(id-1);if($('#next'))$('#next').onclick=()=>read(id+1);window.scrollTo(0,0);nav()}
+function font(d){size=Math.max(14,Math.min(26,size+d));save('size',size);$('.article').style.fontSize=size+'px'}
+function original(page=1){state.view='pdf';state.page=page;$('#heading').textContent='English document';$('#subtitle').textContent='All 13 translated pages, including diagrams and tables.';$('#main').innerHTML=`<div class="readerbar row"><button id="pdfprev" ${page===1?'disabled':''}>←</button><label>Page <select id="pageno">${Array.from({length:13},(_,i)=>`<option ${i+1===page?'selected':''}>${i+1}</option>`).join('')}</select> / 13</label><button id="pdfnext" ${page===13?'disabled':''}>→</button><button id="zoom">Enlarge</button></div><div style="overflow:auto;border-radius:10px"><img id="scan" class="pageimg" alt="Page ${page} of the English document" src="pages-en/page-${String(page).padStart(2,'0')}.jpg"></div><p class="toc">English translation of the supplied PDF. The text and illustrations belong to the original authors.</p>`;$('#pdfprev').onclick=()=>original(page-1);$('#pdfnext').onclick=()=>original(page+1);$('#pageno').onchange=e=>original(+e.target.value);$('#zoom').onclick=()=>{const im=$('#scan');const z=im.style.width==='1500px';im.style.width=z?'100%':'1500px';im.style.maxWidth='none';$('#zoom').textContent=z?'Enlarge':'Reduce'};window.scrollTo(0,0);nav()}
+function nav(){$('#heading').classList.toggle('home-heading',state.view==='home');for(const [id,yes] of [['all',state.view==='home'&&state.filter==='all'||state.view==='reader'],['fav',state.view==='home'&&state.filter==='fav'],['pdf',state.view==='pdf'],['channels',state.view==='channels']])$('#nav-'+id).classList.toggle('active',!!yes)}
+window.goBack=()=>{if(!$('#language-panel').hidden){setLanguagePanel(false);return true;}if(state.view!=='home'){home(state.filter);window.scrollTo(0,0)}else if(state.q||state.filter!=='all'){state.q='';home()}else return false;return true};function setLanguagePanel(open){$('#language-panel').hidden=!open;$('#language').setAttribute('aria-expanded',String(open));if(open)$('#language-ro').focus();else $('#language').focus()}
+$('#language').onclick=()=>setLanguagePanel($('#language-panel').hidden);$('#language-ro').onclick=()=>{save('language','ro');window.location.href='index.html'};$('#language-en').onclick=()=>{save('language','en');setLanguagePanel(false)};$('#language-close').onclick=()=>setLanguagePanel(false);document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#language-panel').hidden)setLanguagePanel(false)});document.addEventListener('click',e=>{if(!e.target.closest('.header-actions')&&!$('#language-panel').hidden)setLanguagePanel(false)});
+
+function channels(){state.view='channels';$('#heading').textContent='Recommended channels';$('#subtitle').textContent='Friendly YouTube channels for repair and electronics.';$('#main').innerHTML=`<p class="toc">Open a channel in the YouTube app.</p><div class="card"><h2>BoardRev</h2><p>@boardrev</p><a href="https://www.youtube.com/@boardrev" class="primary" style="display:inline-block;margin-top:10px;padding:10px 16px;border-radius:12px;text-decoration:none">Open on YouTube →</a></div><div class="card"><h2>Electronics Repair School</h2><p>@electronicsrepairschool</p><a href="https://www.youtube.com/@electronicsrepairschool" class="primary" style="display:inline-block;margin-top:10px;padding:10px 16px;border-radius:12px;text-decoration:none">Open on YouTube →</a></div><div class="card"><h2>JFIXX</h2><p>@JFIXX1</p><a href="https://www.youtube.com/@JFIXX1" class="primary" style="display:inline-block;margin-top:10px;padding:10px 16px;border-radius:12px;text-decoration:none">Open on YouTube →</a></div><div class="card"><h2>DjMarik78</h2><p>@DjMarik78</p><a href="https://www.youtube.com/@DjMarik78" class="primary" style="display:inline-block;margin-top:10px;padding:10px 16px;border-radius:12px;text-decoration:none">Open on YouTube →</a></div>`;window.scrollTo(0,0);nav()}
+$('#nav-all').onclick=()=>{state.q='';home()};$('#nav-fav').onclick=()=>{state.q='';home('fav')};$('#nav-pdf').onclick=()=>original();$('#nav-channels').onclick=channels;$('#theme').onclick=()=>{document.body.classList.toggle('dark');save('dark',document.body.classList.contains('dark'))};home();let last=load('last',null);if(Number.isInteger(last)&&CHAPTERS[last]){const b=document.createElement('button');b.textContent='Continue reading → '+(last===0?'Introduction':last===9?'Glossary':'Chapter '+last);b.className='primary';b.style.margin='15px 0';b.onclick=()=>read(last);$('#main').insertBefore(b,$('#results'))}
+</script><script src="quiz-data.js"></script><script src="reward-docs.js"></script><script src="game.js"></script></html>
+<script>
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').then(reg=>{
+    reg.update();
+    setInterval(()=>reg.update(), 60*60*1000);
+    reg.addEventListener('updatefound',()=>{
+      const nw=reg.installing;
+      nw.addEventListener('statechange',()=>{
+        if(nw.state==='installed'&&navigator.serviceWorker.controller){
+          nw.postMessage('skipWaiting');
+          location.reload();
+        }
+      });
+    });
+  });
+  let refreshing=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{
+    if(refreshing)return;
+    refreshing=true;
+    location.reload();
+  });
+}
+</script>

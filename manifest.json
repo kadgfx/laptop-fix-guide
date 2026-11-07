@@ -1,0 +1,13 @@
+{
+  "name": "Laptop Fix Guide",
+  "short_name": "Laptop Fix",
+  "description": "Laptop diagnostics, measurements and repairs guide",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#050c16",
+  "theme_color": "#050c16",
+  "icons": [
+    { "src": "logo.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "logo.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
